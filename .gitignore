@@ -1,0 +1,36 @@
+# Script-only artifact bundle: commit code + pipeline scripts, NOT generated data/figures.
+# Everything below is produced by running download_dataset.sh / exp_all.sh.
+
+# generated graphs + raw experiment output
+# NOTE: leading '/' anchors these to the bundle root. Without it, an unanchored
+# 'dataset/' also matches scripts/dataset/ and would drop the SNAP->.bin converters
+# (convert_bin.py / convert_pokec.py) that download_dataset.sh needs.
+/data/
+/figures/
+/result/
+/figures_out/
+
+# datasets (downloaded + converted; 3.7 GB). No trailing slash, so a 'dataset'
+# SYMLINK (e.g. pointing at an external data dir) is ignored too -- '/dataset/'
+# would match only a real directory and let such a symlink slip into a commit.
+/dataset
+
+# build products
+src/bin/
+src/obj/
+src/result/
+src/result
+src/data/bin
+/driver/**/*.o
+/driver/**/*.ko
+/driver/**/*.cmd
+/driver/**/*.d
+/driver/**/*.mod
+/driver/**/*.mod.c
+/driver/**/*.order
+/driver/**/*.symvers
+
+# python / logs
+__pycache__/
+*.pyc
+*.log
